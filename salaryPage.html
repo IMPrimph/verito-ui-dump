@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary-blue: #4355f9;
+      --light-blue: #f7f8ff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --success-green: #28a745;
+      --light-green: #e3fcef;
+      --warning-red: #dc3545;
+      --light-gray: #f8f9fa;
+      --border-color: #e9ecef;
+      --progress-bg: #e9ecef;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--light-gray);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .company-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .company-logo {
+      width: 60px;
+      height: 60px;
+      background: var(--light-blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .company-details h1 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .company-meta {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .write-review-btn {
+      background: var(--primary-blue);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+    }
+
+    .salary-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .salary-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .role-title {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .salary-amount {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .salary-range {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .submission-count {
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--primary-blue);
+      padding: 0.25rem 0.75rem;
+      border-radius: 16px;
+      font-size: 0.8rem;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .chart-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-title {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    .bar-chart {
+      height: 250px;
+      display: flex;
+      align-items: flex-end;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .bar-group {
+      flex: 1;
+      text-align: center;
+    }
+
+    .bar {
+      background: var(--primary-blue);
+      width: 100%;
+      border-radius: 6px 6px 0 0;
+      transition: height 0.3s;
+    }
+
+    .bar-label {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .stats-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .stats-title {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stat-item:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+    }
+
+    .stat-value {
+      font-weight: 500;
+    }
+
+    .trend-positive {
+      color: var(--success-green);
+      background: var(--light-green);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--progress-bg);
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary-blue);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .salary-overview {
+        grid-template-columns: 1fr;
+      }
+
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="company-info">
+        <div class="company-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="company-details">
+          <h1>Salary Insights</h1>
+          <div class="company-meta">Based on 2,345 verified submissions</div>
+        </div>
+      </div>
+      <button class="write-review-btn">Submit Salary</button>
+    </header>
+
+    <div class="salary-overview">
+      <div class="salary-card">
+        <div class="role-title">Software Engineer</div>
+        <div class="salary-amount">$120,000</div>
+        <div class="salary-range">Range: $90,000 - $150,000</div>
+        <span class="submission-count">156 submissions</span>
+      </div>
+      <div class="salary-card">
+        <div class="role-title">Product Manager</div>
+        <div class="salary-amount">$135,000</div>
+        <div class="salary-range">Range: $110,000 - $160,000</div>
+        <span class="submission-count">89 submissions</span>
+      </div>
+      <div class="salary-card">
+        <div class="role-title">Data Scientist</div>
+        <div class="salary-amount">$125,000</div>
+        <div class="salary-range">Range: $95,000 - $155,000</div>
+        <span class="submission-count">112 submissions</span>
+      </div>
+    </div>
+
+    <div class="insights-grid">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h2 class="chart-title">Software Engineer Salary by Experience</h2>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-group">
+            <div class="bar" style="height: 60%"></div>
+            <div class="bar-label">0-2 years<br>$95,000</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar" style="height: 80%"></div>
+            <div class="bar-label">3-5 years<br>$120,000</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar" style="height: 100%"></div>
+            <div class="bar-label">5+ years<br>$145,000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-card">
+        <h3 class="stats-title">Salary Insights</h3>
+        <div class="stat-item">
+          <span class="stat-label">Industry Average</span>
+          <span class="stat-value">$118,000</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">YoY Growth</span>
+          <span class="trend-positive">+8.5%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Top Skills Premium</span>
+          <div>
+            <div class="stat-value">Python +12%</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

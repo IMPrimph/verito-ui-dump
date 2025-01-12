@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2b6cb0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-link {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #2b6cb0, #4299e1);
+      color: white;
+      padding: 120px 20px 80px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 32px;
+      opacity: 0.9;
+    }
+
+    .search-bar {
+      background: white;
+      padding: 8px;
+      border-radius: 8px;
+      display: flex;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .search-bar button {
+      background: #2b6cb0;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      opacity: 0.9;
+    }
+
+    .features {
+      padding: 80px 20px;
+      background: white;
+    }
+
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: #f8fafc;
+      padding: 32px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      color: #2b6cb0;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: #2d3748;
+    }
+
+    .feature-description {
+      color: #4a5568;
+    }
+
+    .trending {
+      padding: 80px 20px;
+      background: #f8fafc;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 48px;
+      color: #2d3748;
+    }
+
+    .companies-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .company-card {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .company-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .company-rating {
+      color: #ecc94b;
+      margin-bottom: 8px;
+    }
+
+    .company-stats {
+      color: #718096;
+      font-size: 14px;
+    }
+
+    .cta {
+      padding: 80px 20px;
+      background: #2b6cb0;
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 36px;
+      margin-bottom: 24px;
+    }
+
+    .cta p {
+      font-size: 18px;
+      margin-bottom: 32px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .cta-button {
+      padding: 12px 32px;
+      border-radius: 4px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      background: white;
+      color: #2b6cb0;
+      border: none;
+    }
+
+    .secondary-button {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    footer {
+      background: #2d3748;
+      color: white;
+      padding: 48px 20px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 48px;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .stats {
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo">RateMyManager</div>
+      <div class="nav-links">
+        <a href="#" class="nav-link">Find Companies</a>
+        <a href="#" class="nav-link">Write Review</a>
+        <a href="#" class="nav-link">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Find Great Leaders, Build Better Careers</h1>
+      <p>Discover and rate managers across 100,000+ companies. Make informed career decisions.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Search for a company or manager...">
+        <button>Search</button>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number">500K+</div>
+          <div class="stat-label">Manager Reviews</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">100K+</div>
+          <div class="stat-label">Companies</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">2M+</div>
+          <div class="stat-label">Monthly Users</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3 class="feature-title">Anonymous Reviews</h3>
+        <p class="feature-description">Share honest feedback safely and securely, protected by our privacy-first policy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Data-Driven Insights</h3>
+        <p class="feature-description">Make informed decisions with comprehensive ratings and detailed analytics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Manager Matching</h3>
+        <p class="feature-description">Find leaders whose management style aligns with your work preferences.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="trending">
+    <h2 class="section-title">Trending Companies</h2>
+    <div class="companies-grid">
+      <div class="company-card">
+        <div class="company-name">Tech Corp</div>
+        <div class="company-rating">★★★★☆ 4.2</div>
+        <div class="company-stats">1,234 Reviews • 89% Recommend</div>
+      </div>
+      <div class="company-card">
+        <div class="company-name">Innovation Inc</div>
+        <div class="company-rating">★★★★★ 4.8</div>
+        <div class="company-stats">856 Reviews • 94% Recommend</div>
+      </div>
+      <div class="company-card">
+        <div class="company-name">Future Solutions</div>
+        <div class="company-rating">★★★★☆ 4.3</div>
+        <div class="company-stats">2,145 Reviews • 91% Recommend</div>
+      </div>
+      <div class="company-card">
+        <div class="company-name">Global Systems</div>
+        <div class="company-rating">★★★★☆ 4.1</div>
+        <div class="company-stats">1,567 Reviews • 87% Recommend</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready to Share Your Experience?</h2>
+    <p>Help others make better career decisions while keeping your identity private.</p>
+    <div class="cta-buttons">
+      <button class="cta-button primary-button">Write a Review</button>
+      <button class="cta-button secondary-button">Learn More</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About</h3>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Guidelines</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

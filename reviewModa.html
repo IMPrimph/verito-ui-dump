@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Modal - RateMyManager</title>
+    <style>
+        /* Base styles from previous artifact */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            color: #334155;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            z-index: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background-color: #f1f5f9;
+        }
+
+        .modal-content {
+            padding: 32px;
+        }
+
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .reviewer-profile {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .profile-picture {
+            width: 48px;
+            height: 48px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .profile-info h3 {
+            color: #0f172a;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .profile-details {
+            display: flex;
+            gap: 16px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .rating-details {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+        }
+
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .rating-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rating-label {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .rating-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6366f1;
+        }
+
+        .review-section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .review-text {
+            line-height: 1.8;
+            color: #334155;
+        }
+
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .pros-section, .cons-section {
+            padding: 24px;
+            border-radius: 16px;
+        }
+
+        .pros-section {
+            background-color: #f0fdf4;
+        }
+
+        .cons-section {
+            background-color: #fef2f2;
+        }
+
+        .pros-section h4 {
+            color: #166534;
+            margin-bottom: 16px;
+        }
+
+        .cons-section h4 {
+            color: #991b1b;
+            margin-bottom: 16px;
+        }
+
+        .pros-list, .cons-list {
+            list-style: none;
+        }
+
+        .pros-list li {
+            color: #166534;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .cons-list li {
+            color: #991b1b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .modal-footer {
+            padding: 24px 32px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .feedback-section {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .feedback-count {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .helpful-button {
+            background-color: #6366f1;
+            color: white;
+            border: none;
+        }
+
+        .helpful-button:hover {
+            background-color: #4f46e5;
+        }
+
+        .report-button {
+            background-color: white;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .report-button:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal Overlay -->
+    <div class="modal-overlay">
+        <div class="modal">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2>Review Details</h2>
+                <button class="modal-close">✕</button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <!-- Reviewer Information -->
+                <div class="review-meta">
+                    <div class="reviewer-profile">
+                        <div class="profile-picture">SE</div>
+                        <div class="profile-info">
+                            <h3>Senior Software Engineer</h3>
+                            <div class="profile-details">
+                                <span>Current Employee</span>
+                                <span>•</span>
+                                <span>3+ years at company</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overall-rating">4.5</div>
+                </div>
+
+                <!-- Detailed Ratings -->
+                <div class="rating-details">
+                    <div class="section-title">Rating Breakdown</div>
+                    <div class="rating-grid">
+                        <div class="rating-item">
+                            <span class="rating-label">Work/Life Balance</span>
+                            <span class="rating-value">4.2</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">Compensation</span>
+                            <span class="rating-value">4.5</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">Career Growth</span>
+                            <span class="rating-value">4.8</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">Management</span>
+                            <span class="rating-value">4.3</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">Culture</span>
+                            <span class="rating-value">4.6</span>
+                        </div>
+                        <div class="rating-item">
+                            <span class="rating-label">Learning</span>
+                            <span class="rating-value">4.4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Content -->
+                <div class="review-section">
+                    <div class="section-title">Review</div>
+                    <p class="review-text">
+                        Great work environment with lots of opportunities for growth. The management team is very supportive and always encourages innovation and new ideas. Work-life balance is well respected, and the benefits package is quite competitive compared to other companies in the industry. The team culture is collaborative and everyone is willing to help each other out.
+                        <br><br>
+                        The company has been growing rapidly, which means there are plenty of opportunities for career advancement. The technical challenges are interesting and we're using modern technologies. Code review process is thorough but fair, and there's a strong emphasis on writing quality code.
+                    </p>
+                </div>
+
+                <!-- Pros & Cons -->
+                <div class="pros-cons-grid">
+                    <div class="pros-section">
+                        <h4>✓ Pros</h4>
+                        <ul class="pros-list">
+                            <li>• Flexible work hours and remote options</li>
+                            <li>• Competitive salary and benefits package</li>
+                            <li>• Strong team culture and collaboration</li>
+                            <li>• Modern tech stack and interesting projects</li>
+                            <li>• Good opportunities for growth</li>
+                        </ul>
+                    </div>
+                    <div class="cons-section">
+                        <h4>✕ Cons</h4>
+                        <ul class="cons-list">
+                            <li>• Project deadlines can be tight sometimes</li>
+                            <li>• Some processes need streamlining</li>
+                            <li>• Growing pains as company expands</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <div class="feedback-section">
+                    <span class="feedback-count">24 people found this review helpful</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="action-btn helpful-button">Mark as Helpful</button>
+                    <button class="action-btn report-button">Report Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .rating-bar {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .rating-fill {
+      height: 100%;
+      background: #3b82f6;
+      transition: width 0.3s ease;
+    }
+
+    .trend-up {
+      color: #10b981;
+    }
+
+    .trend-down {
+      color: #ef4444;
+    }
+
+    .quote-card {
+      border-left: 4px solid #3b82f6;
+    }
+
+    .sentiment-positive {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    .sentiment-negative {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .sentiment-neutral {
+      background-color: #f3f4f6;
+      color: #374151;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Company Header -->
+  <div class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <div class="flex items-start justify-between">
+        <div class="flex-1">
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center">
+              <i class="fas fa-building text-4xl text-gray-400"></i>
+            </div>
+            <div>
+              <h1 class="text-3xl font-bold">Tech Corp International</h1>
+              <p class="text-gray-600">Technology · 1000-5000 employees · San Francisco, CA</p>
+              <div class="flex items-center mt-2 gap-4">
+                <div class="flex items-center">
+                  <span class="text-2xl font-bold text-blue-600">4.2</span>
+                  <div class="flex ml-2">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                  </div>
+                </div>
+                <span class="text-gray-600">2,345 reviews</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+          Write a Review
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-3 gap-6">
+      <!-- Left Column -->
+      <div class="col-span-2 space-y-6">
+        <!-- Rating Breakdown -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">Rating Breakdown</h2>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-sm">5 stars</span>
+              <div class="rating-bar flex-1">
+                <div class="rating-fill" style="width: 65%"></div>
+              </div>
+              <span class="w-16 text-sm text-right">65%</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-sm">4 stars</span>
+              <div class="rating-bar flex-1">
+                <div class="rating-fill" style="width: 20%"></div>
+              </div>
+              <span class="w-16 text-sm text-right">20%</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-sm">3 stars</span>
+              <div class="rating-bar flex-1">
+                <div class="rating-fill" style="width: 10%"></div>
+              </div>
+              <span class="w-16 text-sm text-right">10%</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-sm">2 stars</span>
+              <div class="rating-bar flex-1">
+                <div class="rating-fill" style="width: 3%"></div>
+              </div>
+              <span class="w-16 text-sm text-right">3%</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-sm">1 star</span>
+              <div class="rating-bar flex-1">
+                <div class="rating-fill" style="width: 2%"></div>
+              </div>
+              <span class="w-16 text-sm text-right">2%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Trends -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">Rating Trends</h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-600">Overall Rating</span>
+                <i class="fas fa-arrow-up trend-up"></i>
+              </div>
+              <div class="text-2xl font-bold">4.2</div>
+              <div class="text-sm text-gray-600">+0.3 from last month</div>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-600">Management Rating</span>
+                <i class="fas fa-arrow-up trend-up"></i>
+              </div>
+              <div class="text-2xl font-bold">4.0</div>
+              <div class="text-sm text-gray-600">+0.2 from last month</div>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-600">Work-Life Balance</span>
+                <i class="fas fa-arrow-down trend-down"></i>
+              </div>
+              <div class="text-2xl font-bold">3.8</div>
+              <div class="text-sm text-gray-600">-0.1 from last month</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Highlights -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">Review Highlights</h2>
+          <div class="space-y-4">
+            <div class="quote-card bg-gray-50 p-4 rounded">
+              <p class="text-gray-800 italic">"The management team is very supportive and encourages professional growth. They provide excellent feedback and mentoring opportunities."</p>
+              <div class="mt-2 text-sm text-gray-600">Senior Developer · Full-time · 2+ years</div>
+            </div>
+            <div class="quote-card bg-gray-50 p-4 rounded">
+              <p class="text-gray-800 italic">"Great work-life balance and flexible working hours. The company really cares about employee wellbeing."</p>
+              <div class="mt-2 text-sm text-gray-600">Product Manager · Full-time · 1+ years</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="space-y-6">
+        <!-- Quick Stats -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">Quick Stats</h2>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Would Recommend</span>
+                <span class="font-semibold">85%</span>
+              </div>
+              <div class="rating-bar">
+                <div class="rating-fill" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>CEO Approval</span>
+                <span class="font-semibold">78%</span>
+              </div>
+              <div class="rating-bar">
+                <div class="rating-fill" style="width: 78%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Positive Business Outlook</span>
+                <span class="font-semibold">92%</span>
+              </div>
+              <div class="rating-bar">
+                <div class="rating-fill" style="width: 92%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Common Themes -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">Common Themes</h2>
+          <div class="space-y-2">
+            <div class="sentiment-positive px-3 py-2 rounded-lg text-sm">
+              <i class="fas fa-plus-circle mr-2"></i>
+              Strong leadership team
+            </div>
+            <div class="sentiment-positive px-3 py-2 rounded-lg text-sm">
+              <i class="fas fa-plus-circle mr-2"></i>
+              Good benefits package
+            </div>
+            <div class="sentiment-neutral px-3 py-2 rounded-lg text-sm">
+              <i class="fas fa-dot-circle mr-2"></i>
+              Fast-paced environment
+            </div>
+            <div class="sentiment-negative px-3 py-2 rounded-lg text-sm">
+              <i class="fas fa-minus-circle mr-2"></i>
+              Work-life balance challenges
+            </div>
+          </div>
+        </div>
+
+        <!-- Interview Process -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">Interview Process</h2>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Interview Difficulty</span>
+              <span class="text-sm font-semibold">Medium</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Positive Experience</span>
+              <span class="text-sm font-semibold">82%</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Average Process Length</span>
+              <span class="text-sm font-semibold">2-3 weeks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
